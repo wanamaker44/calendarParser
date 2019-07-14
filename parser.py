@@ -10,13 +10,13 @@ with open(filepath) as fp:
    cnt = 1
    while line:
        line = line.split('\t')
-       print(line)
        homeTeam = line[4] == 'Highrock'
        otherTeam = (line[4], line[6])[homeTeam]
-       subj = line[2], (' vs ', ' at ')[homeTeam], otherTeam
+       subj = line[2]+(' vs ', ' at ')[homeTeam]+otherTeam
+       subj = subj.strip()
        allGames.append(game.game(subj, line[1], line[3]))
        line = fp.readline()
        cnt += 1
 
 for aGame in allGames:
-	print(aGame.subject, ',', aGame.date, ',', aGame.time, ',', aGame.date, ',', aGame.time, 'FALSE')
+	print(aGame.subject+','+aGame.date+','+aGame.time+','+aGame.date+','+aGame.time+',FALSE')
