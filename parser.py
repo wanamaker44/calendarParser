@@ -1,8 +1,7 @@
 import game
+import datetime
 
 filepath = "C:/Users/bill/Workspace/scheduleInput.txt"
-
-newGame = game.game('subjectasfdkjdsalfkj', 'date', 'time')
 allGames = []
 
 with open(filepath) as fp:
@@ -18,5 +17,14 @@ with open(filepath) as fp:
        line = fp.readline()
        cnt += 1
 
+fileName = datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.csv'
+
+f = open(fileName, "a")
+
+f.write('SUBJECT, START DATE, START TIME, END DATE, END TIME, ALL DAY EVENT, DESCRIPTION, LOCATION, PRIVATE\n')
+
 for aGame in allGames:
-	print(aGame.subject+','+aGame.date+','+aGame.time+','+aGame.date+','+aGame.time+',FALSE')
+	newRow = aGame.subject+','+aGame.date+','+aGame.time+','+aGame.date+','+aGame.time+',FALSE'
+	f.write(newRow)
+
+f.close()
