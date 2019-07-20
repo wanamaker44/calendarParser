@@ -1,5 +1,6 @@
 import game
 import datetime
+import calendar
 
 filepath = "C:/Users/bill/Workspace/scheduleInput.txt"
 allGames = []
@@ -17,14 +18,18 @@ with open(filepath) as fp:
        line = fp.readline()
        cnt += 1
 
-fileName = datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.csv'
+fileName = 'output/' + datetime.datetime.now().strftime("%Y%m%d%H%M%S") + '.csv'
 
 f = open(fileName, "a")
 
 f.write('SUBJECT, START DATE, START TIME, END DATE, END TIME, ALL DAY EVENT, DESCRIPTION, LOCATION, PRIVATE\n')
 
+gameYear = datetime.datetime.now().year
+
 for aGame in allGames:
-	newRow = aGame.subject+','+aGame.date+','+aGame.time+','+aGame.date+','+aGame.time+',FALSE'
+	gameMonthNum = list(calendar.month_abbr).index(aGame.date.split('-')[1])
+	gameDayNum = aGame.date.split('-')[0]
+	newRow = aGame.subject+','+ str(gameMonthNum) + '/' + str(gameDayNum) + '/' + str(gameYear) + ','+aGame.time+','+aGame.date+','+aGame.time+',FALSE'
 	f.write(newRow)
 
 f.close()
