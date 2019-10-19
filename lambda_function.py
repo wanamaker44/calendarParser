@@ -34,6 +34,7 @@ def parseText(submittedText):
 	# 	allGames.append(game.game(subj, formattedGameDate, gameTime, homeTeam))
 	# 	line = fp.readline()
 	# 	cnt += 1
+	lines[0] = lines[0] + 'added text'
 	return lines
 
 # f.write('SUBJECT, START DATE, START TIME, END DATE, END TIME, ALL DAY EVENT, DESCRIPTION, LOCATION, PRIVATE\n')
