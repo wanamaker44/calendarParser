@@ -39,3 +39,6 @@ for aGame in allGames:
 	print(aGame.time)
 
 #f.close()
+
+def getHello():
+	return 'payload was received. good work idiot'
