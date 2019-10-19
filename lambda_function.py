@@ -15,11 +15,11 @@ def lambda_handler(event, context):
 
 def parseText(submittedText):
 	lines = submittedText.split('\n')
-	with lines as fp:
+#	with lines as fp:
  #	line = fp.readline()
-		cnt = 1
-		while line:
-		line = line.split('\t')
+#		cnt = 1
+#		while line:
+#			line = line.split('\t')
 	# 	homeTeam = line[4] == 'Highrock'
 	# 	otherTeam = (line[4], line[6])[homeTeam]
 	# 	subj = line[2]+(' vs ', ' at ')[homeTeam]+otherTeam
