@@ -16,7 +16,7 @@ def lambda_handler(event, context):
 def parseText(submittedText):
 	lines = submittedText.split('\n')
 	with lines as fp:
- 	line = fp.readline()
+		line = fp.readline()
 		cnt = 1
 		while line:
 			line = line.split('\t')
@@ -34,7 +34,7 @@ def parseText(submittedText):
 		allGames.append(game.game(subj, formattedGameDate, gameTime, homeTeam))
 		line = fp.readline()
 		cnt += 1
-		
+
 	return lines
 
 # f.write('SUBJECT, START DATE, START TIME, END DATE, END TIME, ALL DAY EVENT, DESCRIPTION, LOCATION, PRIVATE\n')
