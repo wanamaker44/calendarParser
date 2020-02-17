@@ -1,8 +1,9 @@
 from dateutil.parser import parse
+from datetime import datetime, timedelta
 
 inputString = '             3	Tue	30-Apr	Brookline Avenue	6:30 PM	T\'s Pub	vs	Highrock'
 inputArray = inputString.split('\t')
-description = ''
+summary = ''
 loopCounter = 0
 finalOutDate = ''
 finalOutTime = ''
@@ -17,7 +18,18 @@ for token in inputArray:
 			else:
 				finalOutDate = outDate.strftime('%Y-%m-%d')
 	except ValueError:
-		description = description + str(token) + ' '
+		summary = summary + str(token) + ' '
 	loopCounter = loopCounter + 1
 	if(loopCounter == len(inputArray)):
-		print(finalOutDate, ' ', finalOutTime, ' ', description)
+		fullFinal = datetime.strptime(finalOutDate+' '+finalOutTime+'-04:00', '%Y-%m-%d %H:%M%z')
+		finalEndTime = fullFinal + timedelta(hours=1.5)
+		game = {
+			"start": {
+				"dateTime": fullFinal.isoformat()
+			},
+			"end": {
+				"dateTime": finalEndTime.isoformat()
+			},
+			"summary": summary
+		}
+		print(game)
