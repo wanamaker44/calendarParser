@@ -1,6 +1,8 @@
 from dateutil.parser import parse
 from datetime import datetime, timedelta
 
+finalCsvOutput = 'Subject,Start Date, Start Time,End Date, End Time\n'
+
 inputString = '             3	Tue	30-Apr	Brookline Avenue	6:30 PM	T\'s Pub	vs	Highrock'
 inputArray = inputString.split('\t')
 summary = ''
@@ -23,7 +25,7 @@ for token in inputArray:
 	if(loopCounter == len(inputArray)):
 		fullFinal = datetime.strptime(finalOutDate+' '+finalOutTime+'-04:00', '%Y-%m-%d %H:%M%z')
 		finalEndTime = fullFinal + timedelta(hours=1.5)
-		game = {
+		gameJSON = {
 			"start": {
 				"dateTime": fullFinal.isoformat()
 			},
@@ -32,4 +34,15 @@ for token in inputArray:
 			},
 			"summary": summary
 		}
-		print(game)
+		print(gameJSON)
+		print()
+
+		newEvent = (summary + ',' + str(fullFinal.date()) + 
+			',' + str(fullFinal.time()) + ',' + str(fullFinal.date()) + ',' +
+			 str(finalEndTime.time()) + '\n')
+		finalCsvOutput = finalCsvOutput + newEvent
+
+		print(finalCsvOutput)
+
+with open('games_to_import.csv','a') as fd:
+			fd.write(finalCsvOutput)
